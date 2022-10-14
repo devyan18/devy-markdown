@@ -1,14 +1,13 @@
-import "./App.css";
-import MyEditor from "./Editor";
-import { useState } from 'react'
+import './App.css'
+import MyEditor from './components/Editor'
+import useDoc from './hooks/useDoc'
 
-function App() {
-
-  const [doc, setDoc] = useState('')
+function App () {
+  const { doc, changeDoc } = useDoc()
 
   return (
-    <MyEditor doc={doc} onChange={setDoc} />
-  );
+    <MyEditor doc={doc} onChange={changeDoc} />
+  )
 }
 
-export default App;
+export default App
