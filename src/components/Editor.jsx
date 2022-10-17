@@ -4,7 +4,7 @@ import { languages } from '@codemirror/language-data'
 import { oneDark } from '@codemirror/theme-one-dark'
 
 export default function MyEditor ({ doc, onChange }) {
-  const toolbars = ['header', 'bold', 'italic', 'link', 'strike', 'image', 'quote', 'olist', 'ulist', 'todo']
+  const myToolbars = ['header', 'bold', 'italic', 'link', 'strike', 'image', 'quote', 'olist', 'ulist', 'todo']
 
   return (
     <MarkdownEditor
@@ -15,7 +15,7 @@ export default function MyEditor ({ doc, onChange }) {
       theme={oneDark}
       spellCheck={false}
       autoFocus={true}
-      toolbars={toolbars}
+      toolbars={myToolbars}
       toolbarsMode={['preview']}
       previewProps={{
         unwrapDisallowed: true,
