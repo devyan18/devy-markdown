@@ -3,6 +3,6 @@
   publish = "/dist"
   base = "/"
 
-  [[redirects]]
-    from = "/*"
-    to = "/dist/index.html"
+[[redirects]]
+  from = "/*"
+  to = "/:doc"
