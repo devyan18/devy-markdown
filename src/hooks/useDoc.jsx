@@ -1,35 +1,27 @@
 import { useState, useEffect } from 'react'
-import { changeUrl, convertStringToBase64 } from '../services/changeURL'
+import {
+  changeUrl,
+  convertBase64ToString,
+  convertStringToBase64
+} from '../services/changeURL'
 
-export default function useDoc () {
+export default function useDoc (data = '') {
   const [doc, setDoc] = useState('')
 
   useEffect(() => {
-    const data = window.location.pathname.split('/')[1]
-
-    if (!data) {
-      const localStorageData = localStorage.getItem('doc')
-
-      const decoded = window.atob(localStorageData)
-
-      changeUrl(localStorageData)
+    try {
+      const decoded = convertBase64ToString(data)
 
       setDoc(decoded)
-    }
-
-    if (data) {
-      try {
-        const decoded = window.atob(data)
-
-        setDoc(decoded)
-      } catch (error) {
-        setDoc('# Error: Invalid URL')
-      }
+    } catch (error) {
+      setDoc('# Error: Invalid URL')
     }
   }, [])
 
   const changeDoc = (value) => {
-    localStorage.setItem('doc', convertStringToBase64(value))
+    const encoded = convertStringToBase64(value)
+
+    changeUrl(encoded)
     setDoc(value)
   }
 
