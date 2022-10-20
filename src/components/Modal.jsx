@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function Modal ({
-  closeModal
-}) {
+export default function Modal ({ closeModal }) {
   const [loading, setLoading] = useState(true)
   const [copied, setCopied] = useState(false)
 
@@ -47,10 +45,10 @@ export default function Modal ({
           loading
             ? <h2>Loading...</h2>
             : (
-                <>
-                  <button onClick={handleCopyToClipboard}>Copiar Link</button>
-                  {copied && <p>✅ copied</p>}
-                </>
+              <>
+                <button onClick={handleCopyToClipboard}>Copiar Link</button>
+                {copied && <p>✅ copied</p>}
+              </>
               )
         }
       </div>
