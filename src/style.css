@@ -105,3 +105,19 @@ button {
     background-color: #0f0f0f98;
   }
 }
+
+.container-body {
+  background-color: #0d1117;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+.preview-container {
+  max-width: 800px;
+  margin-top: 2em;
+}

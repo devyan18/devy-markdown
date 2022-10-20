@@ -1,44 +1,22 @@
-import { useEffect, useState } from 'react'
+import useShorterLinks from '../hooks/useShorterLinks'
 
 export default function Modal ({ closeModal }) {
-  const [loading, setLoading] = useState(true)
-  const [copied, setCopied] = useState(false)
+  const [loading, copiedEditor, copiedPreview, linkEditor, linkPreview, setCopiedEditor, setCopiedPreview] = useShorterLinks()
 
-  const [link, setLink] = useState('')
+  const handleCopyToClipboardEditor = () => {
+    navigator.clipboard.writeText(linkEditor)
+    setCopiedEditor(true)
+  }
 
-  useEffect(() => {
-    const doc = window.location.pathname.split('/')[1]
-
-    const url = `https://devy-markdown.netlify.app/${doc}`
-
-    fetch('https://devy-redirect-production.up.railway.app/api/punter', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        url
-
-      })
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setLink(`https://devy-punter.netlify.app/${data.url}`)
-      })
-      .finally(() => { setLoading(false) })
-  }, [])
-
-  const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(link)
-    setCopied(true)
+  const handleCopyToClipboardPreview = () => {
+    navigator.clipboard.writeText(linkPreview)
+    setCopiedPreview(true)
   }
 
   return (
     <div
       className={'back-modal'}
-      onClick={e => {
-        closeModal()
-      }}
+      onClick={closeModal}
     >
       <div className="modal" onClick={e => e.stopPropagation()}>
         {
@@ -46,8 +24,9 @@ export default function Modal ({ closeModal }) {
             ? <h2>Loading...</h2>
             : (
               <>
-                <button onClick={handleCopyToClipboard}>Copiar Link</button>
-                {copied && <p>✅ copied</p>}
+                <h2>Share</h2>
+                <button onClick={handleCopyToClipboardEditor}>Copy Editor Link to Clipboard {copiedEditor && <span>✅</span>} </button>
+                <button onClick={handleCopyToClipboardPreview}>Copy Preview Link to Clipboard {copiedPreview && <span>✅</span> } </button>
               </>
               )
         }

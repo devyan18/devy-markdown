@@ -28,9 +28,10 @@
   padding: 10px 0px;
   cursor: normal;
   width: 350px;
-  height: 120px;
+  height: max-content;
   border-radius: 12px;
   background-color: #242729;
+  gap: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
