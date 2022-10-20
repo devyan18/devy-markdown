@@ -19,7 +19,7 @@ export default function Preview () {
     <div className='container-body'>
       <MarkdownEditor.Markdown
         className='preview-container'
-        style={{ height: '100vh', padding: '29px 40px 0px 40px' }}
+        style={{ height: 'calc(100vh - 40px)', marginTop: '40px' }}
         linkTarget='_blank'
         unwrapDisallowed={true}
         sanitize={true}
