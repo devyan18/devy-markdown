@@ -20,7 +20,7 @@ export default function useDoc (data = '') {
 
   const changeDoc = (value) => {
     const encoded = convertStringToBase64(value)
-
+    console.log(encoded)
     changeUrl(encoded)
     setDoc(value)
   }
