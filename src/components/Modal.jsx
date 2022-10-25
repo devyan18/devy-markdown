@@ -1,7 +1,16 @@
 import useShorterLinks from '../hooks/useShorterLinks'
 
 export default function Modal ({ closeModal }) {
-  const [loading, copiedEditor, copiedPreview, linkEditor, linkPreview, setCopiedEditor, setCopiedPreview] = useShorterLinks()
+  const [
+    error,
+    loading,
+    copiedEditor,
+    copiedPreview,
+    linkEditor,
+    linkPreview,
+    setCopiedEditor,
+    setCopiedPreview
+  ] = useShorterLinks()
 
   const handleCopyToClipboardEditor = () => {
     navigator.clipboard.writeText(linkEditor)
@@ -19,8 +28,8 @@ export default function Modal ({ closeModal }) {
       onClick={closeModal}
     >
       <div className="modal" onClick={e => e.stopPropagation()}>
-        {
-          loading
+        {!error
+          ? loading
             ? <h2>Loading...</h2>
             : (
               <>
@@ -29,6 +38,8 @@ export default function Modal ({ closeModal }) {
                 <button onClick={handleCopyToClipboardPreview}>Copy Preview Link to Clipboard {copiedPreview && <span>✅</span> } </button>
               </>
               )
+
+          : <h2>Something went wrong</h2>
         }
       </div>
     </div>

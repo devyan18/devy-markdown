@@ -9,6 +9,8 @@ export default function useShorterLinks () {
   const [linkEditor, setLinkEditor] = useState('')
   const [linkPreview, setLinkPreview] = useState('')
 
+  const [error, setError] = useState(false)
+
   const host = `${window.location.protocol}//${window.location.host}`
 
   useEffect(() => {
@@ -22,10 +24,14 @@ export default function useShorterLinks () {
         setLinkEditor(`https://devy-punter.netlify.app/${editor.url}`)
         setLinkPreview(`https://devy-punter.netlify.app/${preview.url}`)
       })
+      .catch((_err) => {
+        setError(true)
+      })
       .finally(() => { setLoading(false) })
   }, [])
 
   return [
+    error,
     loading,
     copiedEditor,
     copiedPreview,
